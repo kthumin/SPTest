@@ -1,24 +1,24 @@
 package ktm.sp.test.web.pojo;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by kthum on 26/8/2017.
  */
 public class FriendListResponse  extends Response {
-    private List<String> friends;
+    private Collection<String> friends;
     private int count;
 
-    public FriendListResponse(List<String> friends)
+    public FriendListResponse(Collection<String> friends)
     {
-        this.friends = friends;
+        this.setFriends(friends);
     }
 
-    public List<String> getFriends() {
+    public Collection<String> getFriends() {
         return friends;
     }
 
-    public void setFriends(List<String> friends) {
+    public void setFriends(Collection<String> friends) {
         this.friends = friends;
     }
 
