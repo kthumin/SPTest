@@ -5,11 +5,11 @@ import java.util.Collection;
 /**
  * Created by kthum on 26/8/2017.
  */
-public class FriendListResponse  extends Response {
+public class ListFriendResponse extends Response {
     private Collection<String> friends;
     private int count;
 
-    public FriendListResponse(Collection<String> friends)
+    public ListFriendResponse(Collection<String> friends)
     {
         this.setFriends(friends);
     }

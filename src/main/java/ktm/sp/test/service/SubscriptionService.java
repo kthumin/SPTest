@@ -5,13 +5,17 @@ import ktm.sp.test.exception.BusinessException;
 import java.util.Collection;
 
 /**
- * Created by kthum on 26/8/2017.
+ * Created by kthum on 27/8/2017.
  */
-public interface FriendService {
+public interface SubscriptionService {
 
-    public Collection<String> getFriendList(String email);
+    static final String ERR_BLOCKED = "ERR_BLOCKED";
+    static final String ERR_NOT_FOUND= "ERR_NOT_FOUND";
 
-    public void createFriends(String emailA, String emailB) throws BusinessException;
+    public void addSubscription(String requester, String target) throws BusinessException;
 
-    public Collection<String> getMutualFriendList(String emailA, String emailB)throws BusinessException;
+    public void blockUpdate(String requester, String target) throws BusinessException;
+
+    public Collection<String> getAllSubscription(String sender, String text) throws BusinessException;
+
 }

@@ -3,7 +3,7 @@ package ktm.sp.test.web.pojo;
 /**
  * Created by kthum on 26/8/2017.
  */
-public class FriendListRequest extends Request
+public class ListFriendRequest extends Request
 {
     private String email;
 

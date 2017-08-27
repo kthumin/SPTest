@@ -1,8 +1,11 @@
 package ktm.sp.test.web;
 
 import ktm.sp.test.exception.BusinessException;
-import ktm.sp.test.service.FriendService;
-import ktm.sp.test.web.pojo.*;
+import ktm.sp.test.service.SubscriptionService;
+import ktm.sp.test.web.pojo.ListSubscriptionRequest;
+import ktm.sp.test.web.pojo.ListSubscriptionResponse;
+import ktm.sp.test.web.pojo.Response;
+import ktm.sp.test.web.pojo.SubscribeRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,64 +20,45 @@ import javax.validation.Valid;
 import java.util.Collection;
 
 /**
- * Created by kthum on 26/8/2017.
+ * Created by kthum on 27/8/2017.
  */
 @RestController
-@RequestMapping("/friend")
-public class FriendController {
+@RequestMapping("/subscription")
+public class SubscriptionController {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private FriendService service;
-
-    @RequestMapping(path = "/list", method = RequestMethod.POST)
-    public ResponseEntity<ListFriendResponse> getFriendList(@RequestBody @Valid ListFriendRequest request)
-    {
-        log.trace("get Friend List");
-
-        //TODO validate request
-        Collection<String> friendList = service.getFriendList(request.getEmail());
-
-        ListFriendResponse body = new ListFriendResponse(friendList);
-        body.setSuccess(true);
-        return new ResponseEntity<ListFriendResponse>(body, HttpStatus.OK );
-    }
-
+    private SubscriptionService service;
 
     @RequestMapping(path = "/add", method = RequestMethod.PUT)
-    public ResponseEntity<Response> addFriend(@RequestBody @Valid AddFriendRequest request)
-    {
-        log.trace("addFriend");
+    public ResponseEntity<Response> addFriend(@RequestBody @Valid SubscribeRequest request) throws BusinessException {
 
-        try {
-            service.createFriends(request.getFriends().get(0), request.getFriends().get(1));
-        } catch (BusinessException e) {
-            e.printStackTrace();
-            //TODO handle exception
-        }
+        service.addSubscription(request.getRequestor(), request.getTarget());
 
         Response body = new Response();
         body.setSuccess(true);
-        return new ResponseEntity<Response>(body, HttpStatus.OK );
+        return new ResponseEntity<Response>(body, HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/mutual", method = RequestMethod.POST)
-    public ResponseEntity<ListFriendResponse> getMutualFriendList(@RequestBody @Valid ListMutualFriendRequest request)
-    {
-        //TODO validate request
-        Collection<String> mutualFriendList = null;
-        try
-        {
-            mutualFriendList = service.getMutualFriendList(request.getFriends().get(0), request.getFriends().get(1));
-        } catch (BusinessException e)
-        {
-            e.printStackTrace();
-            //TODO handle exception
-        }
+    @RequestMapping(path = "/block", method = RequestMethod.PUT)
+    public ResponseEntity<Response> blockUpdate(@RequestBody @Valid SubscribeRequest request) throws BusinessException{
+        service.blockUpdate(request.getRequestor(), request.getTarget());
 
-        ListFriendResponse body = new ListFriendResponse(mutualFriendList);
+        Response body = new Response();
         body.setSuccess(true);
-        return new ResponseEntity<ListFriendResponse>(body, HttpStatus.OK );
+        return new ResponseEntity<Response>(body, HttpStatus.OK);
     }
+
+    @RequestMapping(path = "/list", method = RequestMethod.POST)
+    public ResponseEntity<ListSubscriptionResponse> listSubscription(@RequestBody @Valid ListSubscriptionRequest request) throws BusinessException {
+
+        Collection<String> subList = service.getAllSubscription(request.getSender(), request.getText());
+
+        ListSubscriptionResponse body = new ListSubscriptionResponse(subList);
+        body.setSuccess(true);
+        return new ResponseEntity<ListSubscriptionResponse>(body, HttpStatus.OK);
+    }
+
+
 }

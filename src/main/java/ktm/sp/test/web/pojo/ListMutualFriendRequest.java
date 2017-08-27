@@ -5,7 +5,8 @@ import java.util.List;
 /**
  * Created by kthum on 26/8/2017.
  */
-public class AddFriendRequest extends Request {
+public class ListMutualFriendRequest extends Request {
+
     private List<String> friends;
 
     public List<String> getFriends() {

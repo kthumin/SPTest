@@ -3,7 +3,7 @@ package ktm.sp.test.web.pojo;
 /**
  * Created by kthum on 26/8/2017.
  */
-public abstract class Response
+public class Response
 {
     private String responseCode;
     private String responseDesc;

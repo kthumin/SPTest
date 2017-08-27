@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
  * Created by kthum on 26/8/2017.
  */
 @EnableScan
-public interface FriendRepository extends CrudRepository<PersonEntity, String>{
+public interface PersonRepository extends CrudRepository<PersonEntity, String>{
 
 
 }
