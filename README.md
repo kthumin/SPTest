@@ -12,7 +12,8 @@
 
 ## Working API Endpoint in AWS
 ```
-http://frenmgmt-env.4w2zep3bdt.ap-southeast-1.elasticbeanstalk.com/swagger-ui.html```
+http://frenmgmt-env.4w2zep3bdt.ap-southeast-1.elasticbeanstalk.com/swagger-ui.html
+```
 
 ## How to build and package
 ```
