@@ -10,10 +10,9 @@
 4. Maven for library and release mgmt
 5. Apache Commons for util libraries
 
-## Working API Endpoint
+## Working API Endpoint in AWS
 ```
-http://localhost:8080/swagger-ui.html#/friend-controller
-```
+http://frenmgmt-env.4w2zep3bdt.ap-southeast-1.elasticbeanstalk.com/swagger-ui.html```
 
 ## How to build and package
 ```
